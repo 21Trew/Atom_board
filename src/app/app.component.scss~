@@ -21,6 +21,7 @@
     "controls bar"
     "pie line";
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  //grid-template-rows: 50vh 50vh;
 
   .controls-panel {
     grid-area: controls;

@@ -1,37 +1,44 @@
 import { ChartConfiguration } from 'chart.js';
+import { CHART_COLORS_ARRAY } from './pie-chart.colors';
 
-export const LINE_CHART_DATA: ChartConfiguration['data'] = {
-  datasets: [
-    {
-      data: [],
-      label: 'Линейный график',
-      backgroundColor: 'rgb(81,62,136,0.6)',
-      borderColor: 'rgb(141,114,220)',
-      tension: 0.4
-    }
-  ],
+export const PIE_CHART_DATA: ChartConfiguration['data'] = {
+  datasets: [{
+    data: [],
+    backgroundColor: CHART_COLORS_ARRAY
+  }],
   labels: []
 };
 
-export const LINE_CHART_OPTIONS: ChartConfiguration['options'] = {
+export const PIE_CHART_OPTIONS: ChartConfiguration['options'] = {
   responsive: true,
   maintainAspectRatio: false,
-  scales: {
-    y: {
-      beginAtZero: true,
-      grid: {
-        color: 'rgba(255,255,255,0.5)'
-      },
-      ticks: {
-        color: '#FFFFFF'
+  plugins: {
+    legend: {
+      display: true,
+      position: 'right',
+      labels: {
+        color: '#FFFFFF',
+        padding: 20,
+        font: {
+          size: 12
+        }
       }
     },
-    x: {
-      grid: {
-        color: 'rgba(255,255,255,0.5)'
-      },
-      ticks: {
-        color: '#FFFFFF'
+    tooltip: {
+      enabled: true,
+      backgroundColor: 'rgba(0,0,0,0.8)',
+      titleColor: '#FFFFFF',
+      bodyColor: '#FFFFFF',
+      padding: 10,
+      displayColors: true,
+      callbacks: {
+        label: function(context: any) {
+          const label = context.label || '';
+          const value = context.raw || 0;
+          const total = context.dataset.data.reduce((acc: number, curr: number) => acc + curr, 0);
+          const percentage = ((value / total) * 100).toFixed(1);
+          return `${label}: ${value} (${percentage}%)`;
+        }
       }
     }
   }

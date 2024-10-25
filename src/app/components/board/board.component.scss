@@ -1,0 +1,43 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.charts-grid {
+  @include flex-container;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .left-column, .right-column {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .chart-container {
+    @include card;
+    height: 100%;
+    min-height: 300px;
+
+    canvas {
+      @include responsive-chart;
+    }
+  }
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+
+    .left-column {
+      order: 1;
+    }
+
+    .right-column {
+      order: 2;
+      min-height: 400px;
+    }
+  }
+}

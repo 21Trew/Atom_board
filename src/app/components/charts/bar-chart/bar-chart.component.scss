@@ -1,0 +1,10 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.bar-chart-container {
+  @include chart-container;
+}
+
+:host {
+  @include host-block;
+}

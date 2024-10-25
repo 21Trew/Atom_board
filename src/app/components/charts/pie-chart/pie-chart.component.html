@@ -1,1 +1,13 @@
-<p>pie-chart works!</p>
+<section class="chart-card">
+  <div class="card-header">
+    <h3>Круговая диаграмма</h3>
+  </div>
+
+  <div class="card-content">
+    <canvas baseChart
+            [data]="pieChartData"
+            [options]="pieChartOptions"
+            [type]="chartType">
+    </canvas>
+  </div>
+</section>
