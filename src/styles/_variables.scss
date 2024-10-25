@@ -1,0 +1,28 @@
+// Colors
+$background-primary: #2d1b69;
+$background-secondary: #392180;
+$aside-background: #332073;
+$text-color: #ffffff;
+$link-color: #b19cd9;
+$link-hover-color: lighten($link-color, 15%);
+$border-color: rgba(255, 255, 255, 0.1);
+
+// Sizes
+$aside-width: 300px;
+
+// Breakpoints
+$mobile: 425px;
+$tablet: 768px;
+$desktop: 1024px;
+
+// Shadows
+$card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+// Chart colors
+$chart-colors: (
+  primary: rgba(0, 123, 255, 0.6),
+  secondary: rgba(255, 99, 132, 0.8),
+  tertiary: rgba(255, 206, 86, 0.8),
+  quaternary: rgba(75, 192, 192, 0.8),
+  quinary: rgba(153, 102, 255, 0.8)
+);
