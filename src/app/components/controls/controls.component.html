@@ -1,0 +1,37 @@
+<section class="controls" aria-label="Панель управления графиками">
+  <h2>Изменить период отображения:</h2>
+
+  <nav class="period-selector" aria-label="Выбор периода">
+    <div class="radio-group">
+      <input type="radio"
+             id="daily"
+             name="period"
+             value="daily"
+             [checked]="selectedPeriod === 'daily'"
+             (change)="changePeriod('daily')">
+      <label for="daily" [class.active]="selectedPeriod === 'daily'">День</label>
+
+      <input type="radio"
+             id="weekly"
+             name="period"
+             value="weekly"
+             [checked]="selectedPeriod === 'weekly'"
+             (change)="changePeriod('weekly')">
+      <label for="weekly" [class.active]="selectedPeriod === 'weekly'">Неделя</label>
+
+      <input type="radio"
+             id="monthly"
+             name="period"
+             value="monthly"
+             [checked]="selectedPeriod === 'monthly'"
+             (change)="changePeriod('monthly')">
+      <label for="monthly" [class.active]="selectedPeriod === 'monthly'">Месяц</label>
+    </div>
+  </nav>
+
+  <form class="data-input" aria-label="Ввод данных">
+    <label for="dataInput">Введите данные для отображения:</label>
+    <input id="dataInput" [(ngModel)]="inputData" name="dataInput" placeholder="Только числа через запятую" aria-describedby="dataInputHelp">
+    <button type="submit" (click)="submitData()">Обновить графики</button>
+  </form>
+</section>

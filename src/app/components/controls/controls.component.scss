@@ -1,0 +1,91 @@
+@import '../../../styles/variables';
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  height: 100%;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .period-selector {
+    .radio-group {
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0;
+
+      input[type="radio"] {
+        display: none;
+      }
+
+      label {
+        display: flex;
+        padding: 2rem 4rem;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &.active {
+          background-color: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.8);
+        }
+      }
+    }
+  }
+
+  .data-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    input {
+      padding: 0.5rem;
+      margin: 1rem 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: rgb(141, 114, 220);
+      }
+    }
+
+    button {
+      padding: 2rem 5rem;
+      border: none;
+      border-radius: 0.5rem;
+      background: rgb(141, 114, 220);
+      color: $text-color;
+      font-weight: bold;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgb(81, 62, 136);
+      }
+    }
+  }
+}
