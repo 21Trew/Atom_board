@@ -1,0 +1,138 @@
+@import '../../../styles/variables';
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($background-primary, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: $background-secondary;
+  border-radius: $border-radius;
+  padding: $padding-modal;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: $card-shadow;
+  color: $text-color;
+
+  h2 {
+    margin: 0 0 $padding-secondary;
+    color: $text-color;
+    font-size: 1.5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: $padding-secondary;
+    width: 100%;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: $text-color;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 12px;
+      border: 1px solid $background-canvas;
+      border-radius: $border-radius;
+      background: $background-modal;
+      color: $text-color;
+      font-size: 1rem;
+      height: 40px;
+
+      &:focus {
+        outline: none;
+        border-color: $link-color;
+        box-shadow: $modal-shadow;
+      }
+
+      option {
+        background: $background-modal;
+        color: $text-color;
+        padding: 50px;
+      }
+    }
+
+    select {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 12px;
+      border: 1px solid $background-canvas;
+      border-radius: $border-radius;
+      background-color: $background-modal;
+      color: $text-color;
+      font-size: 1rem;
+      height: 40px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='%23ffffff'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right $padding-secondary center;
+
+      &:focus {
+        outline: none;
+        border-color: $link-color;
+        box-shadow: $modal-shadow;
+      }
+
+      option {
+        background: $background-modal;
+        color: $text-color;
+      }
+    }
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $gap;
+    margin-top: $padding-secondary;
+
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: $border-radius;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 120px;
+      height: 40px;
+
+      &[type="submit"] {
+        background: $link-color;
+        color: $text-color;
+
+        &:hover {
+          background: $link-hover-color;
+        }
+      }
+
+      &[type="button"] {
+        background: $background-secondary;
+        color: $text-color;
+        letter-spacing: 1.5px;
+
+        &:hover {
+          background: $background-aside;
+        }
+      }
+    }
+  }
+}

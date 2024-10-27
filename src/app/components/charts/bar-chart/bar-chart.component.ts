@@ -1,9 +1,10 @@
-import { BaseChartDirective } from 'ng2-charts';
-import { Chart, ChartConfiguration, ChartType, BarController, BarElement, CategoryScale, LinearScale } from 'chart.js';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
-import { Period } from '../../../interfaces/chart.interface';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartConfiguration, ChartType, Chart, BarController, BarElement, CategoryScale, LinearScale } from 'chart.js';
 import { BAR_CHART_DATA, BAR_CHART_OPTIONS } from './bar-chart.config';
+import { ChartDataService } from '../../../services/chart.data.service';
+import { Subscription } from 'rxjs';
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale);
 
@@ -14,42 +15,29 @@ Chart.register(BarController, BarElement, CategoryScale, LinearScale);
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class BarChartComponent implements OnChanges {
-  @Input() data: number[] = [];
-  @Input() period: Period = 'daily';
+export class BarChartComponent implements OnInit, OnDestroy {
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   barChartData: ChartConfiguration['data'] = BAR_CHART_DATA;
   barChartOptions: ChartConfiguration['options'] = BAR_CHART_OPTIONS;
   chartType: ChartType = 'bar';
+  private subscription?: Subscription;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['data'] || changes['period']) {
-      this.updateChart();
-    }
+  constructor(private chartDataService: ChartDataService) {}
+
+  ngOnInit(): void {
+    this.subscription = this.chartDataService.chartData$.subscribe(data => {
+      this.barChartData.datasets = data.datasets;
+      this.barChartData.labels = data.labels;
+      if (this.chart) {
+        this.chart.update();
+      }
+    });
   }
 
-  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
-
-  private updateChart(): void {
-    this.barChartData.datasets[0].data = this.data;
-    this.barChartData.labels = this.generateLabels();
-
-    if (this.chart) {
-      this.chart.update();
-    }
-  }
-
-  private generateLabels(): string[] {
-    switch (this.period) {
-      case 'daily':
-        return Array.from({ length: 24 }, (_, i) => `${i}:00`);
-      case 'weekly':
-        return ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
-      case 'monthly':
-        const weeksInMonth = Math.ceil(this.data.length / 7);
-        return Array.from({ length: weeksInMonth }, (_, i) => `Неделя ${i + 1}`);
-      default:
-        return [];
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }

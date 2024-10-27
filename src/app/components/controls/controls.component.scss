@@ -88,4 +88,31 @@
       }
     }
   }
+
+  .add-data-btn {
+    padding: $padding-primary;
+    border: none;
+    border-radius: $border-radius;
+    background: darken($background-modal, 8);
+    color: $text-color;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: auto;
+    width: fit-content;
+    align-self: flex-end;
+
+    &:hover {
+      box-shadow: $modal-shadow;
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba($link-color, 0.4);
+    }
+  }
 }

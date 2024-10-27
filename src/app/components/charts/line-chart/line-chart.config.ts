@@ -4,9 +4,11 @@ export const LINE_CHART_DATA: ChartConfiguration['data'] = {
   datasets: [
     {
       data: [],
-      backgroundColor: 'rgb(81,62,136,0.6)',
-      borderColor: 'rgb(141,114,220)',
-      tension: 0.4
+      backgroundColor: 'rgba(255, 0, 0, 0.1)',  // Прозрачный красный для области под линией
+      borderColor: 'rgb(255, 0, 0)',           // Красный цвет для линии
+      borderWidth: 1.5,                        // Ширина линии 1.5px
+      tension: 0.4,
+      fill: true                               // Заполнение области под линией
     }
   ],
   labels: []

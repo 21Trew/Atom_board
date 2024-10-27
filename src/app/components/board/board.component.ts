@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service';
 import { CommonModule } from '@angular/common';
 import { LineChartComponent } from '../charts/line-chart/line-chart.component';
 import { BarChartComponent } from '../charts/bar-chart/bar-chart.component';
 import { PieChartComponent } from '../charts/pie-chart/pie-chart.component';
 import { Period } from '../../interfaces/chart.interface';
+import { ChartDataService } from '../../services/chart.data.service';
 
 @Component({
   selector: 'app-board',
@@ -19,23 +19,16 @@ import { Period } from '../../interfaces/chart.interface';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  lineChartData: number[] = [];
-  barChartData: number[] = [];
-  pieChartData: number[] = [];
-  maxDataValue: number = 0;
+  currentPeriod: Period = 'daily';
 
-  constructor(public dataService: DataService) { }
+  constructor(private chartDataService: ChartDataService) {}
 
   ngOnInit(): void {
     this.loadData('daily');
   }
 
   loadData(period: Period): void {
-    this.dataService.getData(period).subscribe(data => {
-      this.maxDataValue = Math.max(...data.lineData, ...data.barData);
-      this.lineChartData = data.lineData;
-      this.barChartData = data.barData;
-      this.pieChartData = data.pieData;
-    });
+    this.currentPeriod = period;
+    this.chartDataService.updatePeriod(period);
   }
 }

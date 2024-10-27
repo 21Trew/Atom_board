@@ -29,9 +29,13 @@
     </div>
   </nav>
 
-  <form class="data-input" aria-label="Ввод данных">
-    <label for="dataInput">Введите данные для отображения:</label>
-    <input id="dataInput" [(ngModel)]="inputData" name="dataInput" placeholder="Только числа через запятую" aria-describedby="dataInputHelp">
-    <button type="submit" (click)="submitData()">Обновить графики</button>
-  </form>
+  <button class="add-data-btn" (click)="showModal = true">
+    Ввести новые данные
+  </button>
+
+  <app-data-input-modal
+    *ngIf="showModal"
+    (close)="showModal = false"
+    (submit)="onDataSubmit($event)">
+  </app-data-input-modal>
 </section>

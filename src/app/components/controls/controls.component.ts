@@ -1,36 +1,36 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Period } from '../../interfaces/chart.interface';
+import { Period, ChartDataInput } from '../../interfaces/chart.interface';
+import { ChartDataService } from '../../services/chart.data.service';
+import { DataInputModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-controls',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DataInputModalComponent],
   templateUrl: './controls.component.html',
   styleUrls: ['./controls.component.scss']
 })
+
 export class ControlsComponent {
   @Output() periodChange = new EventEmitter<Period>();
-  @Output() dataInput = new EventEmitter<number[]>();
+  @Output() dataChange = new EventEmitter<ChartDataInput>();
 
   selectedPeriod: Period = 'daily';
-  inputData: string = '';
+  showModal = false;
+
+  constructor(private chartDataService: ChartDataService) {}
 
   changePeriod(period: Period): void {
     this.selectedPeriod = period;
     this.periodChange.emit(period);
+    this.chartDataService.updatePeriod(period);
   }
 
-  submitData(): void {
-    const numbers = this.inputData
-      .split(',')
-      .map(num => Number(num.trim()))
-      .filter(num => !isNaN(num));
-
-    if (numbers.length > 0) {
-      this.dataInput.emit(numbers);
-      this.inputData = '';
-    }
+  onDataSubmit(data: ChartDataInput): void {
+    this.dataChange.emit(data);
+    this.chartDataService.addData(data);
+    this.showModal = false;
   }
 }
