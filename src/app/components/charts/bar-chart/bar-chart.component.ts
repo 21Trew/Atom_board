@@ -16,6 +16,12 @@ Chart.register(BarController, BarElement, CategoryScale, LinearScale);
   styleUrls: ['./bar-chart.component.scss']
 })
 export class BarChartComponent implements OnInit, OnDestroy {
+  showDescription = false;
+
+  toggleDescription(): void {
+    this.showDescription = !this.showDescription;
+  }
+
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   barChartData: ChartConfiguration['data'] = BAR_CHART_DATA;

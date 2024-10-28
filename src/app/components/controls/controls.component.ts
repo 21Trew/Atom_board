@@ -14,6 +14,12 @@ import { DataInputModalComponent } from '../modal/modal.component';
 })
 
 export class ControlsComponent {
+  showDescription = false;
+
+  toggleDescription(): void {
+    this.showDescription = !this.showDescription;
+  }
+
   @Output() periodChange = new EventEmitter<Period>();
   @Output() dataChange = new EventEmitter<ChartDataInput>();
 

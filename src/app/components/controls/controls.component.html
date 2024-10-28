@@ -1,5 +1,17 @@
 <section class="controls" aria-label="Панель управления графиками">
-  <h2>Изменить период отображения:</h2>
+  <div class="header-content">
+    <h2>Изменить период отображения:</h2>
+    <button class="info-btn" (click)="toggleDescription()">
+      {{ showDescription ? 'Скрыть' : 'Описание' }}
+    </button>
+  </div>
+
+  <p class="chart-description" *ngIf="showDescription">
+    Выберите период для отображения данных:<br>
+    День -  показывает расходы за текущий день<br>
+    Неделя - показывает расходы за текущую неделю<br>
+    Месяц - показывает расходы за текущий месяц
+  </p>
 
   <nav class="period-selector" aria-label="Выбор периода">
     <div class="radio-group">

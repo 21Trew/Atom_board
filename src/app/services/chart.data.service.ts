@@ -27,11 +27,17 @@ export class ChartDataService {
   }
 
   addData(newData: ChartDataInput): void {
+    if (newData.value === undefined || newData.value <= 0) {
+      return;
+    }
+
     const stored = localStorage.getItem(this.STORAGE_KEY);
     const data: StoredData[] = stored ? JSON.parse(stored) : [];
 
     const dataToAdd: StoredData = {
-      ...newData,
+      date: newData.date,
+      category: newData.category,
+      value: newData.value,
       time: newData.time || '23:00'
     };
 
@@ -43,10 +49,8 @@ export class ChartDataService {
     );
 
     if (existingData) {
-      // Если запись существует, обновляем её значение (не добавляем к существующему)
       existingData.value = dataToAdd.value;
     } else {
-      // Если записи нет, добавляем новую
       data.push(dataToAdd);
     }
 
@@ -164,7 +168,7 @@ export class ChartDataService {
     }
 
     this.updateLineChart(chartData);
-    this.updateBarChart(chartData);
+    this.updateBarChart(data);
     this.updatePieChart(data);
   }
 
@@ -178,12 +182,16 @@ export class ChartDataService {
     });
   }
 
-  private updateBarChart(chartData: { labels: string[], values: number[] }): void {
+  private updateBarChart(data: StoredData[]): void {
+    const filteredData = this.filterDataByPeriod(data);
+    const categoryData = this.aggregateByCategory(filteredData);
+    const categories = [...EXPENSE_CATEGORIES];
+
     this.barChartData.next({
-      labels: chartData.labels,
+      labels: categories,
       datasets: [{
         ...BAR_CHART_DATA.datasets[0],
-        data: chartData.values
+        data: categories.map(category => categoryData[category] || 0)
       }]
     });
   }

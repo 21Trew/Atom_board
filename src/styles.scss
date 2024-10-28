@@ -39,6 +39,38 @@ body {
   }
 }
 
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $padding-secondary;
+}
+
+.info-btn {
+  padding: $padding-secondary / 2 $padding-secondary;
+  background: $background-canvas;
+  border: 1px solid rgba($text-color, 0.2);
+  border-radius: $border-radius;
+  color: $text-color;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba($text-color, 0.2);
+  }
+}
+
+.chart-description {
+  font-size: 14px;
+  color: $text-color;
+  margin: $padding-secondary 0;
+  line-height: 1.4;
+  padding: $padding-secondary;
+  background: $background-aside;
+  border-radius: $border-radius;
+}
+
 footer {
   width: 100%;
   padding: 20px;

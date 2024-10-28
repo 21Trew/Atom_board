@@ -1,6 +1,14 @@
 <section class="chart-card">
   <div class="card-header">
-    <h3>Круговая диаграмма</h3>
+    <div class="header-content">
+      <h3>Круговая диаграмма</h3>
+      <button class="info-btn" (click)="toggleDescription()">
+        {{ showDescription ? 'Скрыть' : 'Описание' }}
+      </button>
+    </div>
+    <p class="chart-description" *ngIf="showDescription">
+      Отображает процентное соотношение расходов по категориям за выбранный период
+    </p>
   </div>
 
   <div class="card-content">

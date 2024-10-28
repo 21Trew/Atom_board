@@ -22,7 +22,7 @@ export class DataInputModalComponent {
     date: new Date().toISOString().split('T')[0],
     time: new Date().toLocaleTimeString().slice(0, 5),
     category: 'продукты',
-    value: 0
+    value: undefined as unknown as number
   };
 
   closeModal(): void {
@@ -30,6 +30,10 @@ export class DataInputModalComponent {
   }
 
   submitData(): void {
+    if (!this.inputData.value || this.inputData.value <= 0) {
+      return;
+    }
+
     const data: ChartDataInput = {
       ...this.inputData,
       category: this.selectedCategory,

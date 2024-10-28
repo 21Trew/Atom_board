@@ -3,21 +3,40 @@
 .controls {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 1rem;
+  gap: $gap;
+  padding: $padding-secondary;
   height: 100%;
 
-  h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $padding-secondary;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+
+  .chart-description {
+    font-size: 0.875rem;
+    color: $text-color;
     margin: 0;
+    line-height: 1.4;
+    padding: $padding-secondary;
+    background: $background-aside;
+    border-radius: $border-radius;
   }
 
   .period-selector {
+    margin-top: $padding-secondary;
+
     .radio-group {
       display: flex;
       justify-content: space-between;
-      margin: 1rem 0;
+      margin: $padding-secondary 0;
 
       input[type="radio"] {
         display: none;
@@ -25,12 +44,24 @@
 
       label {
         display: flex;
+        justify-content: center;
+        align-items: center;
         padding: 2rem 4rem;
         cursor: pointer;
         border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 8px;
+        border-radius: $border-radius;
         transition: all 0.3s ease;
         font-size: 1.2rem;
+
+        @media (max-width: $tablet) {
+          padding: 1.5rem 2rem;
+          font-size: 1.1rem;
+        }
+
+        @media (max-width: $mobile) {
+          padding: 1rem 1.5rem;
+          font-size: 1rem;
+        }
 
         &:hover {
           background-color: rgba(255, 255, 255, 0.1);
@@ -62,12 +93,7 @@
       background: rgba(255, 255, 255, 0.05);
       color: #fff;
 
-      &::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-      }
-
       &:focus {
-        outline: none;
         border-color: rgb(141, 114, 220);
       }
     }
@@ -90,6 +116,7 @@
   }
 
   .add-data-btn {
+    margin: auto;
     padding: $padding-primary;
     border: none;
     border-radius: $border-radius;
@@ -98,9 +125,18 @@
     font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    margin: auto;
     width: fit-content;
     align-self: flex-end;
+
+    @media (max-width: $tablet) {
+      padding: 1.5rem 3rem;
+      font-size: 1.3rem;
+    }
+
+    @media (max-width: $mobile) {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+    }
 
     &:hover {
       box-shadow: $modal-shadow;

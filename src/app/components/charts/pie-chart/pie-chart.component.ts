@@ -16,6 +16,12 @@ Chart.register(PieController, ArcElement, Legend, Tooltip);
   styleUrls: ['./pie-chart.component.scss']
 })
 export class PieChartComponent implements OnInit, OnDestroy {
+  showDescription = false;
+
+  toggleDescription(): void {
+    this.showDescription = !this.showDescription;
+  }
+
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   pieChartData: ChartConfiguration['data'] = PIE_CHART_DATA;

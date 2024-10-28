@@ -11,7 +11,7 @@ export interface ChartDataInput {
   date: string;
   time?: string;
   category: ExpenseCategory;
-  value: number;
+  value: number | undefined;
 }
 
 export type Period = 'daily' | 'weekly' | 'monthly';

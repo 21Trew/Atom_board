@@ -16,6 +16,12 @@ Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryS
   styleUrls: ['./line-chart.component.scss']
 })
 export class LineChartComponent implements OnInit, OnDestroy {
+  showDescription = false;
+
+  toggleDescription(): void {
+    this.showDescription = !this.showDescription;
+  }
+
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   lineChartData: ChartConfiguration['data'] = LINE_CHART_DATA;

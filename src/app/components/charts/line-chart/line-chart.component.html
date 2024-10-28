@@ -1,6 +1,17 @@
 <section class="chart-card">
   <div class="card-header">
-    <h3>Линейный график</h3>
+    <div class="header-content">
+      <h3>Линейный график</h3>
+      <button class="info-btn" (click)="toggleDescription()">
+        {{ showDescription ? 'Скрыть' : 'Описание' }}
+      </button>
+    </div>
+    <p class="chart-description" *ngIf="showDescription">
+      Отображает общие расходы по времени:<br>
+      День - по часам<br>
+      Неделя - по дням недели<br>
+      Месяц - по дням месяца
+    </p>
   </div>
 
   <div class="card-content">
