@@ -26,7 +26,7 @@ export class BarChartComponent implements OnInit, OnDestroy {
   constructor(private chartDataService: ChartDataService) {}
 
   ngOnInit(): void {
-    this.subscription = this.chartDataService.chartData$.subscribe(data => {
+    this.subscription = this.chartDataService.barChartData$.subscribe(data => {
       this.barChartData.datasets = data.datasets;
       this.barChartData.labels = data.labels;
       if (this.chart) {

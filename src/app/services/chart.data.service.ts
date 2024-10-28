@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ChartData, ChartDataInput, Period, StoredData, CategoryData } from '../interfaces/chart.interface';
+import { ChartDataInput, Period, StoredData, CategoryData } from '../interfaces/chart.interface';
 import { EXPENSE_CATEGORIES, CATEGORY_COLORS } from '../constants/categories';
-import {PIE_CHART_DATA} from '../components/charts/pie-chart/pie-chart.config';
-import {ChartConfiguration} from 'chart.js';
+import { PIE_CHART_DATA } from '../components/charts/pie-chart/pie-chart.config';
+import { LINE_CHART_DATA } from '../components/charts/line-chart/line-chart.config';
+import { BAR_CHART_DATA } from '../components/charts/bar-chart/bar-chart.config';
+import { ChartConfiguration } from 'chart.js';
 
 @Injectable({
   providedIn: 'root'
@@ -12,33 +14,12 @@ export class ChartDataService {
   private readonly STORAGE_KEY = 'chart_data';
   private currentPeriod: Period = 'daily';
 
-  private chartData = new BehaviorSubject<ChartData>({
-    labels: [],
-    datasets: [{
-      data: [],
-      backgroundColor: 'rgb(141,114,220)',
-      borderColor: 'rgb(81,62,136)',
-      borderWidth: 1
-    }]
-  });
-
+  private lineChartData = new BehaviorSubject<ChartConfiguration['data']>(LINE_CHART_DATA);
+  private barChartData = new BehaviorSubject<ChartConfiguration['data']>(BAR_CHART_DATA);
   private pieChartData = new BehaviorSubject<ChartConfiguration['data']>(PIE_CHART_DATA);
 
-  /*private pieChartData = new BehaviorSubject<ChartData>({
-    labels: [],
-    datasets: [{
-      data: [],
-      backgroundColor: [
-        'rgb(141,114,220)',
-        'rgb(81,62,136)',
-        'rgb(162,136,240)',
-        'rgb(120,100,180)',
-        'rgb(100,80,160)'
-      ]
-    }]
-  });*/
-
-  chartData$ = this.chartData.asObservable();
+  lineChartData$ = this.lineChartData.asObservable();
+  barChartData$ = this.barChartData.asObservable();
   pieChartData$ = this.pieChartData.asObservable();
 
   constructor() {
@@ -182,20 +163,32 @@ export class ChartDataService {
         chartData = { labels: [], values: [] };
     }
 
-    this.chartData.next({
-      labels: chartData.labels,
-      datasets: [{
-        data: chartData.values,
-        backgroundColor: 'rgb(141,114,220)',
-        borderColor: 'rgb(81,62,136)',
-        borderWidth: 1.5
-      }]
-    });
-
-    this.updateCategoryChart(data);
+    this.updateLineChart(chartData);
+    this.updateBarChart(chartData);
+    this.updatePieChart(data);
   }
 
-  private updateCategoryChart(data: StoredData[]): void {
+  private updateLineChart(chartData: { labels: string[], values: number[] }): void {
+    this.lineChartData.next({
+      labels: chartData.labels,
+      datasets: [{
+        ...LINE_CHART_DATA.datasets[0],
+        data: chartData.values
+      }]
+    });
+  }
+
+  private updateBarChart(chartData: { labels: string[], values: number[] }): void {
+    this.barChartData.next({
+      labels: chartData.labels,
+      datasets: [{
+        ...BAR_CHART_DATA.datasets[0],
+        data: chartData.values
+      }]
+    });
+  }
+
+  private updatePieChart(data: StoredData[]): void {
     const filteredData = this.filterDataByPeriod(data);
     const categoryData = this.aggregateByCategory(filteredData);
     const labels = [...EXPENSE_CATEGORIES];

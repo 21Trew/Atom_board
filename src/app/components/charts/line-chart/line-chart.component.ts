@@ -26,7 +26,7 @@ export class LineChartComponent implements OnInit, OnDestroy {
   constructor(private chartDataService: ChartDataService) {}
 
   ngOnInit(): void {
-    this.subscription = this.chartDataService.chartData$.subscribe(data => {
+    this.subscription = this.chartDataService.lineChartData$.subscribe(data => {
       this.lineChartData.datasets = data.datasets;
       this.lineChartData.labels = data.labels;
       if (this.chart) {
