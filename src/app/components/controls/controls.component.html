@@ -6,44 +6,79 @@
     </button>
   </div>
 
-  <p class="chart-description" *ngIf="showDescription">
+  <div class="chart-description" *ngIf="showDescription">
     Выберите период для отображения данных:<br>
     День -  показывает расходы за текущий день<br>
     Неделя - показывает расходы за текущую неделю<br>
-    Месяц - показывает расходы за текущий месяц
-  </p>
+    Месяц - показывает расходы за текущий месяц<br>
+    Произвольный - показывает расходы за указанные даты
+  </div>
 
-  <nav class="period-selector" aria-label="Выбор периода">
-    <div class="radio-group">
-      <input type="radio"
-             id="daily"
-             name="period"
-             value="daily"
-             [checked]="selectedPeriod === 'daily'"
-             (change)="changePeriod('daily')">
-      <label for="daily" [class.active]="selectedPeriod === 'daily'">День</label>
+  <div class="control-block">
+    <nav class="period-selector" aria-label="Выбор периода">
+      <div class="radio-group">
+        <input type="radio"
+               id="daily"
+               name="period"
+               value="daily"
+               [checked]="selectedPeriod === 'daily'"
+               (change)="changePeriod('daily')">
+        <label for="daily" [class.active]="selectedPeriod === 'daily'">День</label>
 
-      <input type="radio"
-             id="weekly"
-             name="period"
-             value="weekly"
-             [checked]="selectedPeriod === 'weekly'"
-             (change)="changePeriod('weekly')">
-      <label for="weekly" [class.active]="selectedPeriod === 'weekly'">Неделя</label>
+        <input type="radio"
+               id="weekly"
+               name="period"
+               value="weekly"
+               [checked]="selectedPeriod === 'weekly'"
+               (change)="changePeriod('weekly')">
+        <label for="weekly" [class.active]="selectedPeriod === 'weekly'">Неделя</label>
 
-      <input type="radio"
-             id="monthly"
-             name="period"
-             value="monthly"
-             [checked]="selectedPeriod === 'monthly'"
-             (change)="changePeriod('monthly')">
-      <label for="monthly" [class.active]="selectedPeriod === 'monthly'">Месяц</label>
+        <input type="radio"
+               id="monthly"
+               name="period"
+               value="monthly"
+               [checked]="selectedPeriod === 'monthly'"
+               (change)="changePeriod('monthly')">
+        <label for="monthly" [class.active]="selectedPeriod === 'monthly'">Месяц</label>
+
+        <input type="radio"
+               id="custom"
+               name="period"
+               value="custom"
+               [checked]="selectedPeriod === 'custom'"
+               (change)="changePeriod('custom')">
+        <label for="custom" [class.active]="selectedPeriod === 'custom'">Произвольный</label>
+      </div>
+    </nav>
+  </div>
+
+  <div class="control-block custom-period" *ngIf="selectedPeriod === 'custom'">
+    <h2>Отобразить за указанные даты:</h2>
+    <div class="date-inputs">
+      <div class="form-group">
+        <label for="startDate">Начальная дата:</label>
+        <input type="date"
+               id="startDate"
+               [(ngModel)]="customPeriod.start"
+               name="startDate"
+               (change)="updateCustomPeriod()">
+      </div>
+      <div class="form-group">
+        <label for="endDate">Конечная дата:</label>
+        <input type="date"
+               id="endDate"
+               [(ngModel)]="customPeriod.end"
+               name="endDate"
+               (change)="updateCustomPeriod()">
+      </div>
     </div>
-  </nav>
+  </div>
 
-  <button class="add-data-btn" (click)="showModal = true">
-    Ввести новые данные
-  </button>
+  <div class="control-block">
+    <button class="add-data-btn" (click)="showModal = true">
+      Ввести новые данные
+    </button>
+  </div>
 
   <app-data-input-modal
     *ngIf="showModal"

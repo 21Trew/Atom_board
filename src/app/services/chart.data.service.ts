@@ -13,6 +13,10 @@ import { ChartConfiguration } from 'chart.js';
 export class ChartDataService {
   private readonly STORAGE_KEY = 'chart_data';
   private currentPeriod: Period = 'daily';
+  private customPeriodDates: { start: string; end: string } = {
+    start: '',
+    end: ''
+  };
 
   private lineChartData = new BehaviorSubject<ChartConfiguration['data']>(LINE_CHART_DATA);
   private barChartData = new BehaviorSubject<ChartConfiguration['data']>(BAR_CHART_DATA);
@@ -143,6 +147,48 @@ export class ChartDataService {
     };
   }
 
+  private aggregateByCustomPeriod(data: StoredData[]): { labels: string[], values: number[] } {
+    const dayMap = new Map<string, number>();
+
+    // Получаем начальную и конечную даты периода
+    const startDate = new Date(this.customPeriodDates.start);
+    const endDate = new Date(this.customPeriodDates.end);
+
+    // Создаем массив всех дат в выбранном периоде
+    const dates: Date[] = [];
+    let currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+      dates.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    // Инициализируем все дни нулевыми значениями
+    dates.forEach(date => {
+      const dateStr = date.toLocaleDateString('ru-RU');
+      dayMap.set(dateStr, 0);
+    });
+
+    // Суммируем траты по дням
+    data.forEach(item => {
+      const itemDate = new Date(item.date);
+      if (itemDate >= startDate && itemDate <= endDate) {
+        const dateStr = itemDate.toLocaleDateString('ru-RU');
+        dayMap.set(dateStr, (dayMap.get(dateStr) || 0) + item.value);
+      }
+    });
+
+    // Сортируем даты и формируем результат
+    const sortedDates = Array.from(dayMap.keys()).sort((a, b) =>
+      new Date(a).getTime() - new Date(b).getTime()
+    );
+
+    return {
+      labels: sortedDates,
+      values: sortedDates.map(date => dayMap.get(date) || 0)
+    };
+  }
+
   private aggregateByCategory(data: StoredData[]): CategoryData {
     return data.reduce((acc: CategoryData, item) => {
       acc[item.category] = (acc[item.category] || 0) + item.value;
@@ -162,6 +208,9 @@ export class ChartDataService {
         break;
       case 'monthly':
         chartData = this.aggregateByMonth(data);
+        break;
+      case 'custom':
+        chartData = this.aggregateByCustomPeriod(data);
         break;
       default:
         chartData = { labels: [], values: [] };
@@ -208,6 +257,23 @@ export class ChartDataService {
         backgroundColor: labels.map(category => CATEGORY_COLORS[category])
       }]
     });
+  }
+
+  updateCustomPeriod(period: { start: string; end: string }): void {
+    this.customPeriodDates = period;
+    this.currentPeriod = 'custom';
+    const stored = localStorage.getItem(this.STORAGE_KEY);
+
+    if (stored) {
+      const allData: StoredData[] = JSON.parse(stored);
+      const filteredData = allData.filter(item => {
+        const itemDate = new Date(item.date);
+        const startDate = new Date(period.start);
+        const endDate = new Date(period.end);
+        return itemDate >= startDate && itemDate <= endDate;
+      });
+      this.updateCharts(filteredData);
+    }
   }
 
   private filterDataByPeriod(data: StoredData[]): StoredData[] {

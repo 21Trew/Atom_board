@@ -14,7 +14,7 @@ export interface ChartDataInput {
   value: number | undefined;
 }
 
-export type Period = 'daily' | 'weekly' | 'monthly';
+export type Period = 'daily' | 'weekly' | 'monthly' | 'custom';
 
 export interface ChartData {
   labels: string[];

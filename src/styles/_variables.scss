@@ -5,9 +5,11 @@ $background-canvas: rgba(255, 255, 255, 0.1);
 $background-aside: #2f2357;
 $background-aside-grid: lighten($background-aside, 5%);
 $background-modal: #B19CD9FF;
+$border-color: rgba(255, 255, 255, 0.25);
 $text-color: #ffffff;
 $link-color: #8d72dc;
 $link-hover-color: darken($link-color, 2%);
+$control-buttons-color: #8d72dc;
 
 // Sizes
 $aside-width: 300px;
@@ -25,3 +27,4 @@ $desktop: 1024px;
 // Shadows
 $card-shadow: 0 4px 6px rgba(143, 143, 143, 0.2);
 $modal-shadow: 0 4px 6px rgba($link-color, 0.5);
+$transition: all 0.2s ease;

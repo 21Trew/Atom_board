@@ -22,6 +22,10 @@
     "pie line";
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 
+  .card {
+    @include card;
+  }
+
   .controls-panel {
     grid-area: controls;
     @include card;

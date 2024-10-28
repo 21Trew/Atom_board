@@ -28,6 +28,17 @@ export class ControlsComponent {
 
   constructor(private chartDataService: ChartDataService) {}
 
+  customPeriod = {
+    start: '',
+    end: ''
+  };
+
+  updateCustomPeriod(): void {
+    if (this.customPeriod.start && this.customPeriod.end) {
+      this.chartDataService.updateCustomPeriod(this.customPeriod);
+    }
+  }
+
   changePeriod(period: Period): void {
     this.selectedPeriod = period;
     this.periodChange.emit(period);
