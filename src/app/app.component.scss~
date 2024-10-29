@@ -1,0 +1,59 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.container {
+  width: 100%;
+  max-width: min(1600px, 100vw);
+  margin: 0 auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-areas:
+    "controls bar"
+    "pie line";
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  //grid-template-rows: 50vh 50vh;
+
+  .controls-panel {
+    grid-area: controls;
+    @include card;
+  }
+  .pie-chart {
+    grid-area: pie;
+    @include card;
+  }
+  .bar-chart {
+    grid-area: bar;
+    @include card;
+  }
+  .line-chart {
+    grid-area: line;
+    @include card;
+  }
+}
+
+@media (max-width: $tablet) {
+  .dashboard-grid {
+    grid-template-areas:
+      "controls"
+      "pie"
+      "bar"
+      "line";
+    grid-template-columns: 1fr;
+  }
+}
+
+footer {
+  color: $text-color;
+  width: fit-content;
+  margin: 0 auto;
+}
