@@ -1,27 +1,69 @@
-# AtomBoard
+# Атомный Дашборд
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+Этот проект был создан с помощью [Angular CLI](https://github.com/angular/angular-cli) версии 18.2.8.
 
-## Development server
+## Как запустить проект
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. **Установите Node.js и npm:**
+- Убедитесь, что на вашем устройстве установлены [Node.js](https://nodejs.org/) и npm (Node Package Manager). Это необходимо для работы Angular CLI.
 
-## Code scaffolding
+2. **Установите Angular CLI:**
+- Откройте терминал или командную строку и выполните команду:
+  ```bash
+  npm install -g @angular/cli
+  ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+3. **Клонируйте репозиторий:**
+- Склонируйте проект на ваше устройство с помощью Git:
+  ```bash
+  git clone <URL_репозитория>
+  ```
+- Перейдите в директорию проекта:
+  ```bash
+  cd atom-board
+  ```
 
-## Build
+4. **Установите зависимости:**
+- Выполните команду для установки всех необходимых зависимостей:
+  ```bash
+  npm install
+  ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+5. **Запустите сервер разработки:**
+- Выполните команду:
+  ```bash
+  ng serve
+  ```
+- Перейдите по адресу `http://localhost:4200/` в вашем веб-браузере. Приложение автоматически перезагрузится, если вы измените любой из исходных файлов.
 
-## Running unit tests
+## Сборка
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Чтобы собрать проект:
+```bash
+ng build
+```
+Артефакты сборки будут сохранены в каталоге `dist/`
 
-## Running end-to-end tests
+## Структура проекта
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- `/src` - исходный код приложения
+- `/dist` - скомпилированные файлы
+- `/public` - статические ресурсы
 
-## Further help
+## Основные компоненты
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Контроль панель (`app-controls`)
+- Круговая диаграмма (`app-pie-chart`)
+- Столбчатая диаграмма (`app-bar-chart`)
+- Линейный график (`app-line-chart`)
+
+## Зависимости
+
+Проект использует следующие основные библиотеки:
+- Angular 18.2.9
+- Chart.js 4.4.5
+- ng2-charts 6.0.1
+
+## Визуальная часть
+
+![video](..%2F..%2F..%2F..%2FDownloads%2FcompressedAtomBoard.mp4)
