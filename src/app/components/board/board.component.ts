@@ -1,3 +1,4 @@
+/*
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LineChartComponent } from '../charts/line-chart/line-chart.component';
@@ -32,3 +33,4 @@ export class BoardComponent implements OnInit {
     this.chartDataService.updatePeriod(period);
   }
 }
+*/

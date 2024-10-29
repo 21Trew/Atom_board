@@ -7,17 +7,30 @@
   padding: $padding-secondary;
   height: 100%;
 
+  @media (max-width: $tablet) {
+    margin: 0;
+    padding: 0;
+  }
+
   .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: $padding-secondary;
 
+    @media (max-width: $tablet) {
+      margin-bottom: 0;
+    }
+
     h2 {
       font-size: 1.5rem;
       font-weight: bold;
       margin: 0;
       color: $text-color;
+
+      @media (max-width: $tablet) {
+        font-size: 1.1rem;
+      }
     }
   }
 
@@ -25,13 +38,6 @@
     background: $background-canvas;
     border-radius: $border-radius;
     padding: $padding-secondary;
-
-    h2 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: $padding-secondary;
-      color: $text-color;
-    }
   }
 
   .chart-description {
@@ -50,6 +56,7 @@
       display: flex;
       justify-content: space-between;
       gap: $padding-secondary;
+      flex-wrap: wrap;
 
       input[type="radio"] {
         display: none;
@@ -69,12 +76,18 @@
         color: $text-color;
         background-color: $background-secondary;
 
-        @media (max-width: $tablet) {
+        @media (min-width: $desktop) {
+          padding: 1rem;
+          font-size: 1rem;
+          min-width: 100px;
+        }
+
+        @media (min-width: $tablet) {
           padding: 1.2rem;
           font-size: 1.1rem;
         }
 
-        @media (max-width: $mobile) {
+        @media (min-width: $mobile) {
           padding: 1rem;
           font-size: 1rem;
         }
@@ -93,7 +106,7 @@
 
   .custom-period {
     h2 {
-     margin: 0;
+     margin: 0 0 $padding-primary;
     }
 
     .date-inputs {
@@ -129,7 +142,7 @@
         }
       }
 
-      @media (max-width: $mobile) {
+      @media (max-width: ($tablet - 1)) {
         flex-direction: column;
       }
     }

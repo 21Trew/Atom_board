@@ -1,3 +1,4 @@
+/*
 @import '../../../styles/variables';
 @import '../../../styles/mixins';
 
@@ -28,6 +29,16 @@
     }
   }
 
+  @media (width: $desktop) {
+    .bar-chart {
+      height: 100%;
+      margin: auto 0;
+
+      canvas {
+      }
+    }
+  }
+
   @media (max-width: $mobile) {
     flex-direction: column;
 
@@ -41,3 +52,4 @@
     }
   }
 }
+*/
