@@ -66,4 +66,10 @@ ng build
 
 ## Визуальная часть
 
-![video](..%2F..%2F..%2F..%2FDownloads%2FcompressedAtomBoard.mp4)
+https://github.com/user-attachments/assets/a26d25e8-d7aa-4d42-98e7-782d45005678
+
+## Адаптив
+
+![collage](https://github.com/user-attachments/assets/6b6dfe89-c0a5-4116-b109-62d9e7058f5b)
+
+
