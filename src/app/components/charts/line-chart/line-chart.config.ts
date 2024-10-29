@@ -4,12 +4,12 @@ export const LINE_CHART_DATA: ChartConfiguration['data'] = {
   datasets: [
     {
       data: [],
-      backgroundColor: 'rgb(81,62,136,0.6)',
-      borderColor: 'rgb(141,114,220)',
+      backgroundColor: `darkviolet`,
+      borderColor: 'white',
+      borderWidth: 2,
       tension: 0.4
     }
-  ],
-  labels: []
+  ]
 };
 
 export const LINE_CHART_OPTIONS: ChartConfiguration['options'] = {

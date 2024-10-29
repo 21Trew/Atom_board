@@ -5,32 +5,24 @@
 
   <section class="dashboard">
     <div class="dashboard-grid">
-      <aside class="controls-panel card">
+      <aside class="card">
         <app-controls
           (periodChange)="onPeriodChange($event)"
-          (dataInput)="onDataChange($event)">
+          (dataChange)="onDataChange($event)">
         </app-controls>
       </aside>
 
       <article class="pie-chart card">
-        <app-pie-chart [data]="pieChartData" [period]="currentPeriod"></app-pie-chart>
+        <app-pie-chart></app-pie-chart>
       </article>
 
       <article class="bar-chart card">
-        <app-bar-chart [data]="barChartData" [period]="currentPeriod"></app-bar-chart>
+        <app-bar-chart></app-bar-chart>
       </article>
 
       <article class="line-chart card">
-        <app-line-chart [data]="lineChartData" [period]="currentPeriod"></app-line-chart>
+        <app-line-chart></app-line-chart>
       </article>
     </div>
   </section>
-
-  <footer>
-    <p>Разработка сайта -
-      <a href="https://t.me/LopatinVS" target="_blank" rel="noopener">
-        <strong>Лопатин Владимир</strong>
-      </a>
-    </p>
-  </footer>
 </main>

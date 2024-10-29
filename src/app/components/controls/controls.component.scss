@@ -3,86 +3,175 @@
 .controls {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 1rem;
+  gap: $gap;
+  padding: $padding-secondary;
   height: 100%;
 
-  h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
+  @media (max-width: $tablet) {
     margin: 0;
+    padding: 0;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $padding-secondary;
+
+    @media (max-width: $tablet) {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0;
+      color: $text-color;
+
+      @media (max-width: $tablet) {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .control-block {
+    background: $background-canvas;
+    border-radius: $border-radius;
+    padding: $padding-secondary;
+  }
+
+  .chart-description {
+    font-size: 0.875rem;
+    color: $text-color;
+    margin: 0;
+    line-height: 1.4;
+    padding: $padding-secondary;
+    background: $background-aside;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
   }
 
   .period-selector {
     .radio-group {
       display: flex;
-      gap: 1rem;
+      justify-content: space-between;
+      gap: $padding-secondary;
+      flex-wrap: wrap;
 
       input[type="radio"] {
         display: none;
       }
 
       label {
-        padding: 0.5rem 1rem;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
         cursor: pointer;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 4px;
-        transition: all 0.3s ease;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        transition: $transition;
+        font-size: 1.2rem;
+        color: $text-color;
+        background-color: $background-secondary;
+
+        @media (min-width: $desktop) {
+          padding: 1rem;
+          font-size: 1rem;
+          min-width: 100px;
+        }
+
+        @media (min-width: $tablet) {
+          padding: 1.2rem;
+          font-size: 1.1rem;
+        }
+
+        @media (min-width: $mobile) {
+          padding: 1rem;
+          font-size: 1rem;
+        }
 
         &:hover {
-          background-color: rgba(255, 255, 255, 0.1);
+          background-color: $background-modal;
         }
 
         &.active {
-          background-color: rgba(255, 255, 255, 0.2);
-          border-color: rgba(255, 255, 255, 0.8);
+          background-color: $background-aside;
+          border-color: $background-primary;
         }
       }
     }
   }
 
-  .data-input {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    label {
-      font-size: 1.2rem;
-      font-weight: bold;
+  .custom-period {
+    h2 {
+     margin: 0 0 $padding-primary;
     }
 
-    input {
-      padding: 0.5rem;
-      margin: 1rem 0;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 0.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
+    .date-inputs {
+      display: flex;
+      gap: $padding-secondary;
 
-      &::placeholder {
-        color: rgba(255, 255, 255, 0.5);
+      .form-group {
+        flex: 1;
+
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          color: $text-color;
+          font-size: 0.875rem;
+        }
+
+        input[type="date"] {
+          padding: 0.75rem;
+          border: 1px solid $border-color;
+          border-radius: $border-radius;
+          background: $background-modal;
+          color: $text-color;
+          font-size: 1rem;
+
+          &::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+          }
+
+          &:focus {
+            outline: none;
+            border-color: $border-color;
+          }
+        }
       }
 
-      &:focus {
-        outline: none;
-        border-color: rgb(141, 114, 220);
+      @media (max-width: ($tablet - 1)) {
+        flex-direction: column;
       }
     }
+  }
 
-    button {
-      padding: 2rem 5rem;
-      border: none;
-      border-radius: 0.5rem;
-      background: rgb(141, 114, 220);
-      color: $text-color;
-      font-weight: bold;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
+  .add-data-btn {
+    width: 100%;
+    padding: $padding-primary;
+    border: none;
+    border-radius: $border-radius;
+    background: $control-buttons-color;
+    color: $text-color;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: $transition;
 
-      &:hover {
-        background: rgb(81, 62, 136);
-      }
+    @media (max-width: $tablet) {
+      padding: 1.2rem;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: $mobile) {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+
+    &:hover {
+      background: $background-modal;
     }
   }
 }

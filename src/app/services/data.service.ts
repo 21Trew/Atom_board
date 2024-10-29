@@ -1,3 +1,4 @@
+/*
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ChartData, FilteredData, Period } from '../interfaces/chart.interface';
@@ -85,3 +86,4 @@ export class DataService {
     return Math.round(values.reduce((sum, value) => sum + value, 0) / values.length);
   }
 }
+*/

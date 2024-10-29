@@ -1,6 +1,17 @@
 <section class="chart-card">
   <div class="card-header">
-    <h3>Столбчатая диаграмма</h3>
+    <div class="header-content">
+      <h3>Столбчатая диаграмма</h3>
+      <button class="info-btn" (click)="toggleDescription()">
+        {{ showDescription ? 'Скрыть' : 'Описание' }}
+      </button>
+    </div>
+    <p class="chart-description" *ngIf="showDescription">
+      Показывает расходы по категориям за выбранный период:<br>
+      День - траты по категориям за текущий день<br>
+      Неделя - траты по категориям за неделю<br>
+      Месяц - траты по категориям за месяц
+    </p>
   </div>
 
   <div class="card-content">

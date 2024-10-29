@@ -7,6 +7,11 @@
   margin: 0 auto;
   overflow-x: hidden;
   box-sizing: border-box;
+
+  @media (max-width: $tablet) {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .dashboard {
@@ -21,6 +26,21 @@
     "controls bar"
     "pie line";
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+  .card {
+    @include card;
+
+    @media (max-width: $tablet) {
+      margin: 0;
+      padding: 10px;
+      max-width: 300px;
+    }
+
+    @media (max-width: $desktop) {
+      margin: 0 auto;
+      max-width: 100%;
+    }
+  }
 
   .controls-panel {
     grid-area: controls;

@@ -8,3 +8,9 @@
 :host {
   @include host-block;
 }
+
+@media (width: $desktop) {
+  .card-content {
+    height: 325px;
+  }
+}
